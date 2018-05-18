@@ -11,7 +11,7 @@ public class UIInteraction : MonoBehaviour {
 
 
     //public enum Action { OPENSTORE, OPENCRATE, OPENCUSTOMIZATIONMENU };
-    public Button storeButton, extraCrystalButton, crateMenuButton, crateStoreButton, customizationButton;
+    public Button storeButton, extraCrystalButton, crateMenuButton, crateStoreButton, backToCrateMenuButton, customizationButton;
 
     private void Start()
     {
@@ -19,6 +19,7 @@ public class UIInteraction : MonoBehaviour {
         extraCrystalButton.onClick.AddListener(delegate { EnableObject("store"); });
         crateMenuButton.onClick.AddListener(delegate { EnableObject("crateMenu");  });
         crateStoreButton.onClick.AddListener(delegate { EnableObject("crateStore"); });
+        backToCrateMenuButton.onClick.AddListener(delegate { EnableObject("backToCrateMenu"); });
         customizationButton.onClick.AddListener(delegate { EnableObject("customizationMenu"); });
     }
 
@@ -37,6 +38,11 @@ public class UIInteraction : MonoBehaviour {
             case "crateMenu": crateMenu.SetActive(true);
                 break;
             case "crateStore":
+                crateMenu.SetActive(false);
+                crateStore.SetActive(true);
+                break;
+            case "backToCrateMenu":
+                crateStore.SetActive(false);
                 crateMenu.SetActive(true);
                 break;
             case "customizationMenu": customizationMenu.SetActive(true);

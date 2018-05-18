@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 114354329560457786}
   - component: {fileID: 114283536825271486}
   m_Layer: 5
-  m_Name: Crate Button
+  m_Name: Crate Menu Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,10 +120,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   store: {fileID: 0}
-  crate: {fileID: 0}
+  crateMenu: {fileID: 0}
+  crateStore: {fileID: 0}
   customizationMenu: {fileID: 0}
   storeButton: {fileID: 114948508025199888}
-  crateButton: {fileID: 114283536825271486}
+  extraCrystalButton: {fileID: 0}
+  crateMenuButton: {fileID: 114283536825271486}
+  crateStoreButton: {fileID: 0}
+  backToCrateMenuButton: {fileID: 0}
   customizationButton: {fileID: 114782661671576614}
 --- !u!114 &114283536825271486
 MonoBehaviour:
