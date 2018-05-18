@@ -3,7 +3,8 @@ using UnityEngine.UI;
 
 public class BuyCash : MonoBehaviour {
 
-    [SerializeField] private int cashValue = 1000;
+    [SerializeField] private int cashValue = 0;
+    [SerializeField] private int crystalValue = 0;
 
     private IncomeManager incomeManager;
     private Button buyButton;
@@ -22,5 +23,6 @@ public class BuyCash : MonoBehaviour {
     void BuyOnClick()
     {
         incomeManager.TotalCash = incomeManager.TotalCash += cashValue;
+        incomeManager.CrystalTotal = incomeManager.CrystalTotal += crystalValue;
     }
 }

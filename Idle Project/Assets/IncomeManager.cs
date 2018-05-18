@@ -4,10 +4,28 @@ using UnityEngine;
 
 public class IncomeManager : MonoBehaviour {
 
+    #region variables
+    [Header("Super Cash properties")]
     [SerializeField] private int totalCash = 0;
     [SerializeField] private int incomeRate = 10;
-    [SerializeField] private float incomeBonus = 1.5f;
+    [SerializeField] private float incomeModifier = 1.5f;
 
+    [Header("Crystal Properties")]
+    [SerializeField] private int crystalTotal = 0;
+    #endregion
+
+    #region superCashProperties
+    public int TotalCash
+    {
+        get
+        {
+            return totalCash;
+        }
+        set
+        {
+            totalCash = value;
+        }
+    }
 
     public int IncomeRate
     {
@@ -21,18 +39,24 @@ public class IncomeManager : MonoBehaviour {
         }
     }
 
-    public int TotalCash
+    public float IncomeModifier { get; set; }
+    #endregion
+
+    #region crystalProperties
+    public int CrystalTotal
     {
-        get {
-            return totalCash;
+        get
+        {
+            return crystalTotal;
         }
         set
         {
-            totalCash = value;
+            crystalTotal = value;
         }
     }
+    #endregion
 
-    public float IncomeModifier { get; set; }
+
 
     // Use this for initialization
     void Start()
@@ -48,5 +72,10 @@ public class IncomeManager : MonoBehaviour {
     void AddCash()
     {
         totalCash += incomeRate;
+    }
+
+    void AddCrystals(int crystalsToAdd)
+    {
+        crystalTotal += crystalsToAdd;
     }
 }

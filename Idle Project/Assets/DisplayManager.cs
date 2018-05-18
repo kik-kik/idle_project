@@ -6,6 +6,7 @@ public class DisplayManager : MonoBehaviour {
     IncomeManager incomeManager;
     [SerializeField] Text incomeRateText;
     [SerializeField] Text totalCashText;
+    [SerializeField] Text totalCrystalsText;
 
 	// Use this for initialization
 	void Start () {
@@ -22,8 +23,10 @@ public class DisplayManager : MonoBehaviour {
     {
         int incomeRate = incomeManager.IncomeRate;
         int totalCash = incomeManager.TotalCash;
+        int totalCrystals = incomeManager.CrystalTotal;
 
         incomeRateText.text = incomeRate.ToString();
         totalCashText.text = totalCash.ToString();
+        totalCrystalsText.text = totalCrystals.ToString();
     }
 }
