@@ -6,17 +6,19 @@ using UnityEngine.UI;
 
 public class UIInteraction : MonoBehaviour {
 
-    [SerializeField] private GameObject store, crate, customizationMenu;
+    [SerializeField] private GameObject store, crateMenu, crateStore, customizationMenu;
     //[SerializeField] List<GameObject> UIObjects = new List<GameObject>();
 
 
     //public enum Action { OPENSTORE, OPENCRATE, OPENCUSTOMIZATIONMENU };
-    public Button storeButton, crateButton, customizationButton;
+    public Button storeButton, extraCrystalButton, crateMenuButton, crateStoreButton, customizationButton;
 
     private void Start()
     {
         storeButton.onClick.AddListener(delegate { EnableObject("store"); });
-        crateButton.onClick.AddListener(delegate { EnableObject("crate");  });
+        extraCrystalButton.onClick.AddListener(delegate { EnableObject("store"); });
+        crateMenuButton.onClick.AddListener(delegate { EnableObject("crateMenu");  });
+        crateStoreButton.onClick.AddListener(delegate { EnableObject("crateStore"); });
         customizationButton.onClick.AddListener(delegate { EnableObject("customizationMenu"); });
     }
 
@@ -32,7 +34,10 @@ public class UIInteraction : MonoBehaviour {
         {
             case "store": store.SetActive(true);
                 break;
-            case "crate": crate.SetActive(true);
+            case "crateMenu": crateMenu.SetActive(true);
+                break;
+            case "crateStore":
+                crateMenu.SetActive(true);
                 break;
             case "customizationMenu": customizationMenu.SetActive(true);
                 break;
