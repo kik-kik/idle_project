@@ -352,6 +352,8 @@ MonoBehaviour:
   incomeRateText: {fileID: 114724522606162990}
   totalCashText: {fileID: 114704169547232036}
   totalCrystalsText: {fileID: 114648139071752470}
+  cratesTotalText: {fileID: 0}
+  cratesStatusDisplay: You have {0} crates.
 --- !u!114 &114380512547951306
 MonoBehaviour:
   m_ObjectHideFlags: 1

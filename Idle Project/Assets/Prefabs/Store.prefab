@@ -367,7 +367,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1834038050506580
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,7 +531,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Buy now
+  m_Text: 'Buy now
+
+    (10000 Cash)'
 --- !u!114 &114156241699416602
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -597,8 +599,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a7a14830dda3cc4cb7f069096208cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cashValue: 0
-  crystalValue: 50
+  resourceToBuy: 1
+  quantityToBuy: 50
+  resourceRequired: 0
+  cost: 10000
 --- !u!114 &114186294057422372
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -705,7 +709,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Buy now
+  m_Text: 'Buy now
+
+    (5000 Cash)'
 --- !u!114 &114371335345000624
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -955,8 +961,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a7a14830dda3cc4cb7f069096208cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cashValue: 0
-  crystalValue: 20
+  resourceToBuy: 1
+  quantityToBuy: 20
+  resourceRequired: 0
+  cost: 5000
 --- !u!114 &114751777264575306
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1063,8 +1071,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a7a14830dda3cc4cb7f069096208cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cashValue: 1000
-  crystalValue: 0
+  resourceToBuy: 0
+  quantityToBuy: 1000
+  resourceRequired: 1
+  cost: 15
 --- !u!114 &114832462924568596
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1210,8 +1220,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a7a14830dda3cc4cb7f069096208cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cashValue: 2000
-  crystalValue: 0
+  resourceToBuy: 0
+  quantityToBuy: 2000
+  resourceRequired: 1
+  cost: 25
 --- !u!114 &114994319994351788
 MonoBehaviour:
   m_ObjectHideFlags: 1

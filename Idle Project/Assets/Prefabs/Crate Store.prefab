@@ -349,8 +349,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a7a14830dda3cc4cb7f069096208cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cashValue: 1000
-  crystalValue: 0
+  resourceToBuy: 0
+  quantityToBuy: 0
+  resourceRequired: 0
+  cost: 0
 --- !u!114 &114087520409647748
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -590,7 +592,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1 Crate (1000 Super Cash)
+  m_Text: '1 Crate
+
+    (20 Crystals)'
 --- !u!114 &114426240899006604
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -623,7 +627,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '2 Crates (1500 Super Cash) '
+  m_Text: '2 Crates
+
+    (35 Crystals) '
 --- !u!114 &114569130403377722
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -646,8 +652,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a7a14830dda3cc4cb7f069096208cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cashValue: 2000
-  crystalValue: 0
+  resourceToBuy: 0
+  quantityToBuy: 0
+  resourceRequired: 0
+  cost: 0
 --- !u!114 &114576457750228406
 MonoBehaviour:
   m_ObjectHideFlags: 1

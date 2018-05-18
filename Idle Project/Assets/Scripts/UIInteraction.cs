@@ -11,7 +11,7 @@ public class UIInteraction : MonoBehaviour {
 
 
     //public enum Action { OPENSTORE, OPENCRATE, OPENCUSTOMIZATIONMENU };
-    public Button storeButton, extraCrystalButton, crateMenuButton, crateStoreButton, backToCrateMenuButton, customizationButton;
+    public Button storeButton, extraCrystalButton, crateMenuButton, crateStoreButton, backToCrateMenuButton, customizationButton, githubButton;
 
     private void Start()
     {
@@ -21,6 +21,7 @@ public class UIInteraction : MonoBehaviour {
         crateStoreButton.onClick.AddListener(delegate { EnableObject("crateStore"); });
         backToCrateMenuButton.onClick.AddListener(delegate { EnableObject("backToCrateMenu"); });
         customizationButton.onClick.AddListener(delegate { EnableObject("customizationMenu"); });
+        githubButton.onClick.AddListener(delegate { EnableObject("github"); });
     }
 
     private void OnMouseDown()
@@ -46,6 +47,9 @@ public class UIInteraction : MonoBehaviour {
                 crateMenu.SetActive(true);
                 break;
             case "customizationMenu": customizationMenu.SetActive(true);
+                break;
+            case "github":
+                Application.OpenURL("https://github.com/Kristofelek/idle_project");
                 break;
             default:
                 return;
