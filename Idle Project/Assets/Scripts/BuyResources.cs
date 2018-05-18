@@ -53,7 +53,11 @@ public class BuyResources : MonoBehaviour {
                 if (CheckQuantity(resourceRequired, requiredQuantity))
                 {
                     BuyCash(quantityToBuy);
-                    RemoveResource(resourceRequired, requiredQuantity);
+                }
+                else
+                {
+                    InvalidTransaction();
+                    return;
                 }
                 break;
             case ResourcesList.CRYSTAL:
@@ -61,16 +65,27 @@ public class BuyResources : MonoBehaviour {
                 {
                     BuyCrystals(quantityToBuy);
                 }
+                else
+                {
+                    InvalidTransaction();
+                    return;
+                }
                 break;
             case ResourcesList.CRATES:
                 if (CheckQuantity(resourceRequired, requiredQuantity))
                 {
                     BuyCrates(quantityToBuy);
                 }
+                else
+                {
+                    InvalidTransaction();
+                    return;
+                }
                 break;
             default: InvalidTransaction();
                 return;
         }
+        RemoveResource(resourceRequired, requiredQuantity);
     }
 
     void RemoveResource(ResourcesList resourceRequired, int requiredQuantity)

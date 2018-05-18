@@ -602,7 +602,7 @@ MonoBehaviour:
   resourceToBuy: 1
   quantityToBuy: 50
   resourceRequired: 0
-  cost: 10000
+  requiredQuantity: 10000
 --- !u!114 &114186294057422372
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -964,7 +964,7 @@ MonoBehaviour:
   resourceToBuy: 1
   quantityToBuy: 20
   resourceRequired: 0
-  cost: 5000
+  requiredQuantity: 5000
 --- !u!114 &114751777264575306
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1074,7 +1074,7 @@ MonoBehaviour:
   resourceToBuy: 0
   quantityToBuy: 1000
   resourceRequired: 1
-  cost: 15
+  requiredQuantity: 5
 --- !u!114 &114832462924568596
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1223,7 +1223,7 @@ MonoBehaviour:
   resourceToBuy: 0
   quantityToBuy: 2000
   resourceRequired: 1
-  cost: 25
+  requiredQuantity: 10
 --- !u!114 &114994319994351788
 MonoBehaviour:
   m_ObjectHideFlags: 1

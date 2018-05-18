@@ -858,6 +858,11 @@ Prefab:
       propertyPath: incomeRate
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114750876853560532, guid: 8a19a37712e261a409139be6864104b3,
+        type: 2}
+      propertyPath: crystalTotal
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8a19a37712e261a409139be6864104b3, type: 2}
   m_IsPrefabParent: 0
@@ -1132,10 +1137,6 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1762228482791446, guid: 3ca48dc917306524fb3db8c057a1e9af, type: 2}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3ca48dc917306524fb3db8c057a1e9af, type: 2}
