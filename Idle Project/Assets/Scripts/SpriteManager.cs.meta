@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ba00f197f0e86404ca81c9c4640de15c
+timeCreated: 1526757561
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - crateImage: {fileID: 21300000, guid: 1bb7b6f87ea87be41a25c94c1ca4bf3c, type: 3}
+  - crystalImage: {fileID: 21300000, guid: 51cbf6e0aefa3464ba1c716d3be413aa, type: 3}
+  - coinImage: {fileID: 21300000, guid: 5ed5157cf45e6ee409511594fb89377b, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

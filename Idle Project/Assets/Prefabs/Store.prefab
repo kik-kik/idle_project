@@ -1107,7 +1107,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Buy now
+  m_Text: 'Buy now
+
+    (10 Crystals)'
 --- !u!114 &114878199563895918
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1140,7 +1142,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Buy now
+  m_Text: 'Buy now
+
+    (5 Crystals)'
 --- !u!114 &114878297029561550
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -6,12 +6,12 @@ using UnityEngine.UI;
 
 public class UIInteraction : MonoBehaviour {
 
-    [SerializeField] private GameObject store, crateMenu, crateStore, customizationMenu;
+    [SerializeField] private GameObject store, crateMenu, openCrate, crateStore, customizationMenu;
     //[SerializeField] List<GameObject> UIObjects = new List<GameObject>();
 
 
     //public enum Action { OPENSTORE, OPENCRATE, OPENCUSTOMIZATIONMENU };
-    public Button storeButton, extraCrystalButton, crateMenuButton, crateStoreButton, backToCrateMenuButton, customizationButton, githubButton;
+    public Button storeButton, extraCrystalButton, crateMenuButton, crateStoreButton, openCrateButton, backToCrateMenuButton, customizationButton, githubButton;
 
     private void Start()
     {
@@ -19,6 +19,7 @@ public class UIInteraction : MonoBehaviour {
         extraCrystalButton.onClick.AddListener(delegate { EnableObject("store"); });
         crateMenuButton.onClick.AddListener(delegate { EnableObject("crateMenu");  });
         crateStoreButton.onClick.AddListener(delegate { EnableObject("crateStore"); });
+        openCrateButton.onClick.AddListener(delegate { EnableObject("openCrate"); });
         backToCrateMenuButton.onClick.AddListener(delegate { EnableObject("backToCrateMenu"); });
         customizationButton.onClick.AddListener(delegate { EnableObject("customizationMenu"); });
         githubButton.onClick.AddListener(delegate { EnableObject("github"); });
@@ -41,6 +42,9 @@ public class UIInteraction : MonoBehaviour {
             case "crateStore":
                 crateMenu.SetActive(false);
                 crateStore.SetActive(true);
+                break;
+            case "openCrate":
+                openCrate.SetActive(true);
                 break;
             case "backToCrateMenu":
                 crateStore.SetActive(false);

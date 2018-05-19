@@ -17,6 +17,40 @@ public class BuyResources : MonoBehaviour {
     private ResourceManager resourceManager;
     private Button buyButton;
 
+    #region getters
+    public ResourcesList ResourcesToBuy
+    {
+        get
+        {
+            return resourceToBuy;
+        }
+    }
+
+    public int QuantityToBuy
+    {
+        get
+        {
+            return quantityToBuy;
+        }
+    }
+
+    public ResourcesList ResourceRequired
+    {
+        get
+        {
+            return resourceRequired;
+        }
+    }
+
+    public int RequiredQuantity
+    {
+        get
+        {
+            return requiredQuantity;
+        }
+    }
+    #endregion
+
 
     private void Start()
     {
