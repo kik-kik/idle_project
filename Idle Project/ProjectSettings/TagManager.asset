@@ -5,6 +5,13 @@ TagManager:
   serializedVersion: 2
   tags:
   - ItemImage
+  - mining_source
+  - minebox
+  - warehouse
+  - elevator_building
+  - elevator_boundry
+  - elevator_shaft_bottom
+  - elevator_shaft_top
   layers:
   - Default
   - TransparentFX

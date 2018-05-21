@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [DisallowMultipleComponent]
-public class Character_Movement : MonoBehaviour {
+public class WarehouseWorkerController : MonoBehaviour
+{
 
     #region variables
     [SerializeField] private bool move = false;
@@ -11,7 +12,7 @@ public class Character_Movement : MonoBehaviour {
 
     [Header("Speed")]
     [SerializeField] private float movementSpeed = 1f;
-    [Range(1,3)]
+    [Range(1, 3)]
     [SerializeField] private float speedRate = 1f;
     #endregion
 
@@ -21,13 +22,14 @@ public class Character_Movement : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
 
         if (move || manager)
         {
             MoveCharacter();
         }
-        
+
     }
 
     /// <summary>
@@ -52,8 +54,21 @@ public class Character_Movement : MonoBehaviour {
 
 
 
+
+
     void OnCollisionEnter2D(Collision2D col)
     {
+        if (col.transform.tag == "warehouse")
+        {
+            //TODO: do something when dropping off the coins
+            print("dropping off coins to the warehouse");
+        }
+        else if (col.transform.tag == "elevator_building")
+        {
+            //TODO: do something when collecting coins
+            print("collecting stuff from the elevator building");
+        }
+
         RotateCharacter();
     }
 }
