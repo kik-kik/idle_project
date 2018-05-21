@@ -10,8 +10,8 @@ public class MinerController : MonoBehaviour {
     [SerializeField] private bool manager = false;
 
     [Header("Speed")]
-    [Range(1, 3)]
-    [SerializeField] private float movementSpeed = 1f;
+    [Range(10, 32)]
+    [SerializeField] private float movementSpeed = 16f;
     [Range(1,3)]
     [SerializeField] private float movementSpeedModifier = 1f;
 
