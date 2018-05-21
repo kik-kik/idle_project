@@ -2065,7 +2065,7 @@ MonoBehaviour:
   movementSpeed: -1
   capacity: 100
   resourceCollected: 0
-  collect_resources: 1
+  collectResources: 1
 --- !u!212 &1423164679
 SpriteRenderer:
   m_ObjectHideFlags: 0
