@@ -5,19 +5,24 @@ using UnityEngine;
 public class ElevatorController : MonoBehaviour
 {
 
-    private BoxCollider2D boxCollider;
+    BoxCollider2D boxCollider;
+    ElevatorBuildingManager elevatorManager;
+    MineboxController mineBoxController;
 
     [SerializeField] private bool isMoving = true;
     [SerializeField] private float movementSpeed = -1f;
 
-    [SerializeField] int max_capacity = 0;
-    [SerializeField] private bool collect_resources = true;
+    [SerializeField] float capacity = 100f;
+    [SerializeField] float resourceCollected = 0f;
+    [SerializeField] private bool collectResources = true;
     
 
     // Use this for initialization
     void Start()
     {
         boxCollider = GetComponentInParent<BoxCollider2D>();
+        elevatorManager = FindObjectOfType<ElevatorBuildingManager>();
+        mineBoxController = FindObjectOfType<MineboxController>();
     }
 
     // Update is called once per frame
@@ -52,17 +57,39 @@ public class ElevatorController : MonoBehaviour
         movementSpeed -= movementSpeed * 2;
     }
 
+    private void DropOffResources()
+    {
+        //TODO: Drop off resources to the elevator building
+        elevatorManager.AddResources(resourceCollected);
+        resourceCollected = 0f;
+    }
+
+    private void CollectResources()
+    {
+        if (resourceCollected < capacity)
+        {
+            resourceCollected = Mathf.Clamp(mineBoxController.TotalResource, 0f, capacity);
+            mineBoxController.TotalResource -= resourceCollected;
+        }
+        //TODO: Collect Resources from the elevator
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.transform.tag == "elevator_shaft_top")
         {
-            collect_resources = true;
+            DropOffResources();
+            collectResources = true;
             ChangeDirection();
         }
         else if (collision.transform.tag == "elevator_shaft_bottom")
-        {   
-            collect_resources = false;
+        {
+            collectResources = false;
             ChangeDirection();
+        }
+        else if (collision.transform.tag == "mine_trigger" && collectResources)
+        {
+            CollectResources();
         }
     }
 

@@ -14,7 +14,25 @@ public class WarehouseWorkerController : MonoBehaviour
     [SerializeField] private float movementSpeed = 1f;
     [Range(1, 3)]
     [SerializeField] private float speedRate = 1f;
+
+    [Header("Carrying")]
+    [Range(1, 3)]
+    [SerializeField] private float collectingSpeed = 1f;
+    [Range(1, 3)]
+    [SerializeField] private float collectingModifier = 1f;
+    [SerializeField] float capacity = 100f;
+    [SerializeField] private float resourceCollected = 0f;
+
+    ElevatorBuildingManager elevatorManager;
+    WarehouseManager warehouseManager;
+
     #endregion
+
+    private void Start()
+    {
+        elevatorManager = FindObjectOfType<ElevatorBuildingManager>();
+        warehouseManager = FindObjectOfType<WarehouseManager>();
+    }
 
     private void OnMouseDown()
     {
@@ -53,22 +71,34 @@ public class WarehouseWorkerController : MonoBehaviour
     }
 
 
+    void CollectResource()
+    {
+        if (resourceCollected < capacity)
+        {
+            resourceCollected = Mathf.Clamp(elevatorManager.ResourceHeld, 0f, capacity);
+            elevatorManager.RemoveResources(resourceCollected);
+        }
+    }
 
+    void DropOffResources()
+    {
+        warehouseManager.AddResources(resourceCollected);
+        resourceCollected = 0f;
+    }
 
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.transform.tag == "warehouse")
+        if (col.transform.tag == "elevator_building")
+        {
+            CollectResource();
+        }
+        else if (col.transform.tag == "warehouse")
         {
             //TODO: do something when dropping off the coins
             print("dropping off coins to the warehouse");
+            DropOffResources();
         }
-        else if (col.transform.tag == "elevator_building")
-        {
-            //TODO: do something when collecting coins
-            print("collecting stuff from the elevator building");
-        }
-
         RotateCharacter();
     }
 }

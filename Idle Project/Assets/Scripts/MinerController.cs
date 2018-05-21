@@ -10,14 +10,18 @@ public class MinerController : MonoBehaviour {
     [SerializeField] private bool manager = false;
 
     [Header("Speed")]
+    [Range(1, 3)]
     [SerializeField] private float movementSpeed = 1f;
     [Range(1,3)]
     [SerializeField] private float movementSpeedModifier = 1f;
+
+    [Header("Mining")]
+    [Range(1, 3)]
     [SerializeField] private float miningSpeed = 1f;
+    [Range(1, 3)]
     [SerializeField] private float miningRate = 1f;
     [SerializeField] float capacity = 100f;
-
-    private float resourceCollected = 0f;
+    [SerializeField] private float resourceCollected = 0f;
 
     private MineboxController mineBoxController;
 
@@ -30,7 +34,7 @@ public class MinerController : MonoBehaviour {
 
     private void Start()
     {
-        mineBoxController = GetComponent<MineboxController>();
+        mineBoxController = FindObjectOfType<MineboxController>();
     }
 
     // Update is called once per frame
@@ -65,25 +69,21 @@ public class MinerController : MonoBehaviour {
 
     void MineResource()
     {
-        while (capacity <= resourceCollected)
+        if (resourceCollected < capacity)
         {
-            resourceCollected += miningRate * miningRate;
+            resourceCollected = capacity;
         }
     }
 
     void DropOffResources()
     {
-        while (resourceCollected > 0f)
-        {
-            resourceCollected -= miningRate * miningRate;
-        }
-        //TODO: Update the totalResource in the box controller
-        print(mineBoxController.TotalResource);
         mineBoxController.TotalResource += resourceCollected;
+        resourceCollected = 0f;
     }
 
     void OnCollisionEnter2D(Collision2D col)
     {
+        print(col.transform.tag);
         if (col.transform.tag == "mining_source")
         {
             print("collecting coins");

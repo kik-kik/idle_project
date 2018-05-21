@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MineboxController : MonoBehaviour {
 
-    private float totalResource = 0f;
+    [SerializeField] private float totalResource = 0f;
 
 	public float TotalResource
     {
@@ -18,8 +18,4 @@ public class MineboxController : MonoBehaviour {
         }
     }
 
-    private void FixedUpdate()
-    {
-        print(totalResource);
-    }
 }
