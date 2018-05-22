@@ -6,7 +6,10 @@ public class MineboxController : MonoBehaviour {
 
     [SerializeField] private float totalResource = 0f;
 
-	public float TotalResource
+    [SerializeField] GameObject resourceCounterObject;
+    TextMesh resourceCounterTextMesh;
+
+    public float TotalResource
     {
         get
         {
@@ -15,7 +18,20 @@ public class MineboxController : MonoBehaviour {
         set
         {
             totalResource = value;
+            print("Setting new value");
+            UpdateResourceCounterTextMesh();
         }
+    }
+
+
+    private void Start()
+    {
+        resourceCounterTextMesh = resourceCounterObject.GetComponent<TextMesh>();
+    }
+
+    public void UpdateResourceCounterTextMesh()
+    {
+        resourceCounterTextMesh.text = totalResource.ToString();
     }
 
 }

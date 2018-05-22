@@ -15,7 +15,9 @@ public class ElevatorController : MonoBehaviour
     [SerializeField] float capacity = 100f;
     [SerializeField] float resourceCollected = 0f;
     [SerializeField] private bool collectResources = true;
-    
+
+    [SerializeField] GameObject resourceCounterObject;
+    TextMesh resourceCounterTextMesh;
 
     // Use this for initialization
     void Start()
@@ -23,6 +25,7 @@ public class ElevatorController : MonoBehaviour
         boxCollider = GetComponentInParent<BoxCollider2D>();
         elevatorManager = FindObjectOfType<ElevatorBuildingManager>();
         mineBoxController = FindObjectOfType<MineboxController>();
+        resourceCounterTextMesh = resourceCounterObject.GetComponent<TextMesh>();
     }
 
     // Update is called once per frame
@@ -74,11 +77,18 @@ public class ElevatorController : MonoBehaviour
         //TODO: Collect Resources from the elevator
     }
 
+    void UpdateResourceCounterTextMesh()
+    {
+        resourceCounterTextMesh.text = resourceCollected.ToString();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.transform.tag == "elevator_shaft_top")
         {
             DropOffResources();
+            UpdateResourceCounterTextMesh();
+            elevatorManager.UpdateResourceCounterTextMesh();
             collectResources = true;
             ChangeDirection();
         }
@@ -90,6 +100,8 @@ public class ElevatorController : MonoBehaviour
         else if (collision.transform.tag == "mine_trigger" && collectResources)
         {
             CollectResources();
+            //mineBoxController.UpdateResourceCounterTextMesh();
+            UpdateResourceCounterTextMesh();
         }
     }
 

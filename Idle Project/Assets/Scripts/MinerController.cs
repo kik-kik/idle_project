@@ -24,7 +24,9 @@ public class MinerController : MonoBehaviour {
     [SerializeField] private float resourceCollected = 0f;
 
     private MineboxController mineBoxController;
-
+    [SerializeField] GameObject resourceCounterObject;
+    TextMesh resourceCounterTextMesh;
+    
     #endregion
 
     private void OnMouseDown()
@@ -35,6 +37,7 @@ public class MinerController : MonoBehaviour {
     private void Start()
     {
         mineBoxController = FindObjectOfType<MineboxController>();
+        resourceCounterTextMesh = resourceCounterObject.GetComponent<TextMesh>();
     }
 
     // Update is called once per frame
@@ -65,6 +68,17 @@ public class MinerController : MonoBehaviour {
         //movementSpeed -= movementSpeed * 2f;
         //transform.Rotate(0f, transform.eulerAngles.y + 180f, 0f);
         transform.rotation *= Quaternion.Euler(0f, 180f, 0f);
+        ResetCounterRotation();
+    }
+
+    void ResetCounterRotation()
+    {
+        resourceCounterObject.transform.rotation *= Quaternion.Euler(0f, 180f, 0f);
+    }
+
+    void UpdateResourceCounterTextMesh()
+    {
+        resourceCounterTextMesh.text = resourceCollected.ToString();
     }
 
     void MineResource()
@@ -73,12 +87,14 @@ public class MinerController : MonoBehaviour {
         {
             resourceCollected = capacity;
         }
+        UpdateResourceCounterTextMesh();
     }
 
     void DropOffResources()
     {
         mineBoxController.TotalResource += resourceCollected;
         resourceCollected = 0f;
+        UpdateResourceCounterTextMesh();
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -86,13 +102,12 @@ public class MinerController : MonoBehaviour {
         print(col.transform.tag);
         if (col.transform.tag == "mining_source")
         {
-            print("collecting coins");
             MineResource();
         }
         else if (col.transform.tag == "minebox")
         {
-            print("dropping coins");
             DropOffResources();
+            mineBoxController.UpdateResourceCounterTextMesh();
         }
 
         RotateCharacter();

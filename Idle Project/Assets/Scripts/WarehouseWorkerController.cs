@@ -25,6 +25,9 @@ public class WarehouseWorkerController : MonoBehaviour
 
     ElevatorBuildingManager elevatorManager;
     WarehouseManager warehouseManager;
+    [SerializeField] GameObject resourceCounterObject;
+    RectTransform resourceCounter;
+    TextMesh resourceCounterTextMesh;
 
     #endregion
 
@@ -32,6 +35,8 @@ public class WarehouseWorkerController : MonoBehaviour
     {
         elevatorManager = FindObjectOfType<ElevatorBuildingManager>();
         warehouseManager = FindObjectOfType<WarehouseManager>();
+        resourceCounter = resourceCounterObject.GetComponent<RectTransform>();
+        resourceCounterTextMesh = resourceCounterObject.GetComponent<TextMesh>();
     }
 
     private void OnMouseDown()
@@ -70,6 +75,11 @@ public class WarehouseWorkerController : MonoBehaviour
         transform.rotation *= Quaternion.Euler(0f, 180f, 0f);
     }
 
+    void ResetCounterRotation()
+    {
+        resourceCounter.rotation = Quaternion.Euler(0f, 0f, 0f);
+    }
+
 
     void CollectResource()
     {
@@ -77,6 +87,7 @@ public class WarehouseWorkerController : MonoBehaviour
         {
             resourceCollected = Mathf.Clamp(elevatorManager.ResourceHeld, 0f, capacity);
             elevatorManager.RemoveResources(resourceCollected);
+            UpdateResourceCounterTextMesh();
         }
     }
 
@@ -84,6 +95,12 @@ public class WarehouseWorkerController : MonoBehaviour
     {
         warehouseManager.AddResources(resourceCollected);
         resourceCollected = 0f;
+        UpdateResourceCounterTextMesh();
+    }
+
+    void UpdateResourceCounterTextMesh()
+    {
+        resourceCounterTextMesh.text = resourceCollected.ToString();
     }
 
 
@@ -92,6 +109,7 @@ public class WarehouseWorkerController : MonoBehaviour
         if (col.transform.tag == "elevator_building")
         {
             CollectResource();
+            elevatorManager.UpdateResourceCounterTextMesh();
         }
         else if (col.transform.tag == "warehouse")
         {
@@ -100,5 +118,6 @@ public class WarehouseWorkerController : MonoBehaviour
             DropOffResources();
         }
         RotateCharacter();
+        ResetCounterRotation();
     }
 }
