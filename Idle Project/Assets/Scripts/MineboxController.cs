@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class MineboxController : MonoBehaviour {
 
+    #region variables
     [SerializeField] private float totalResource = 0f;
 
-    [SerializeField] GameObject resourceCounterObject;
+    GameObject resourceCounterObject;
     TextMesh resourceCounterTextMesh;
+    #endregion
 
+    #region getters_and_setters
     public float TotalResource
     {
         get
@@ -18,20 +21,23 @@ public class MineboxController : MonoBehaviour {
         set
         {
             totalResource = value;
-            print("Setting new value");
-            UpdateResourceCounterTextMesh();
         }
     }
-
+    #endregion
 
     private void Start()
     {
+        resourceCounterObject = gameObject.transform.Find("Resource Counter").gameObject;
+
         resourceCounterTextMesh = resourceCounterObject.GetComponent<TextMesh>();
+        UpdateResourceCounterTextMesh();
     }
 
+    /// <summary>
+    /// This method updates the objects label to display current resource value.
+    /// </summary>
     public void UpdateResourceCounterTextMesh()
     {
         resourceCounterTextMesh.text = totalResource.ToString();
     }
-
 }

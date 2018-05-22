@@ -13,6 +13,7 @@ TagManager:
   - elevator_shaft_bottom
   - elevator_shaft_top
   - mine_trigger
+  - miner
   layers:
   - Default
   - TransparentFX

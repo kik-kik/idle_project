@@ -5,27 +5,43 @@ using UnityEngine;
 public class ElevatorController : MonoBehaviour
 {
 
-    BoxCollider2D boxCollider;
+    #region variables
     ElevatorBuildingManager elevatorManager;
     MineboxController mineBoxController;
 
     [SerializeField] private bool isMoving = true;
     [SerializeField] private float movementSpeed = -1f;
 
-    [SerializeField] float capacity = 100f;
-    [SerializeField] float resourceCollected = 0f;
+    [Header("Collection")]
     [SerializeField] private bool collectResources = true;
+    [SerializeField] private float capacity = 100f;
+    [SerializeField] private float resourceCollected = 0f;
+    
 
-    [SerializeField] GameObject resourceCounterObject;
+    //GameObject resourceCounterObject;
     TextMesh resourceCounterTextMesh;
+    #endregion
 
-    // Use this for initialization
+    #region getters_and_setters
+    public float ResourceCollected
+    {
+        get
+        {
+            return resourceCollected;
+        }
+
+    }
+    #endregion
+
     void Start()
     {
-        boxCollider = GetComponentInParent<BoxCollider2D>();
-        elevatorManager = FindObjectOfType<ElevatorBuildingManager>();
-        mineBoxController = FindObjectOfType<MineboxController>();
+        GameObject resourceCounterObject = gameObject.transform.Find("Resource Counter").gameObject;
         resourceCounterTextMesh = resourceCounterObject.GetComponent<TextMesh>();
+
+        UpdateResourceCounterTextMesh();
+
+        elevatorManager = FindObjectOfType<ElevatorBuildingManager>();
+        //mineBoxController = FindObjectOfType<MineboxController>();
     }
 
     // Update is called once per frame
@@ -38,19 +54,19 @@ public class ElevatorController : MonoBehaviour
     {
         if (isMoving)
         {
-            Bounds areaBounds = boxCollider.bounds;
+            //Bounds areaBounds = boxCollider.bounds;
 
             Vector3 currentPosition = transform.position;
             float newYPos = currentPosition.y + movementSpeed * Time.deltaTime;
 
-            newYPos = Mathf.Clamp(newYPos, areaBounds.min.y, areaBounds.max.y);
+            //newYPos = Mathf.Clamp(newYPos, areaBounds.min.y, areaBounds.max.y);
 
             transform.position = new Vector2(currentPosition.x, newYPos);
 
-            if (transform.position.y == areaBounds.min.y || transform.position.y == areaBounds.max.y)
+            /*if (transform.position.y == areaBounds.min.y || transform.position.y == areaBounds.max.y)
             {
                 movementSpeed -= movementSpeed * 2f;
-            }
+            }*/
         }
     }
 
@@ -72,9 +88,13 @@ public class ElevatorController : MonoBehaviour
         if (resourceCollected < capacity)
         {
             resourceCollected = Mathf.Clamp(mineBoxController.TotalResource, 0f, capacity);
-            mineBoxController.TotalResource -= resourceCollected;
+            UpdateResourceCounterTextMesh();
         }
-        //TODO: Collect Resources from the elevator
+        if (resourceCollected >= capacity)
+        {
+            collectResources = false;
+            ChangeDirection();
+        }
     }
 
     void UpdateResourceCounterTextMesh()
@@ -83,7 +103,7 @@ public class ElevatorController : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
-    {
+    {               
         if (collision.transform.tag == "elevator_shaft_top")
         {
             DropOffResources();
@@ -99,9 +119,14 @@ public class ElevatorController : MonoBehaviour
         }
         else if (collision.transform.tag == "mine_trigger" && collectResources)
         {
+            GameObject mineBoxControllerObj = collision.transform.parent.Find("Mine Box").gameObject;
+            mineBoxController = mineBoxControllerObj.GetComponent<MineboxController>();
+
             CollectResources();
-            //mineBoxController.UpdateResourceCounterTextMesh();
-            UpdateResourceCounterTextMesh();
+            mineBoxController.TotalResource -= resourceCollected;
+            mineBoxController.UpdateResourceCounterTextMesh();
+
+            
         }
     }
 

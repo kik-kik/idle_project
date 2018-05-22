@@ -6,6 +6,7 @@ using UnityEngine;
 public class MinerController : MonoBehaviour {
 
     #region variables
+    [Header("Movement")]
     [SerializeField] private bool move = false;
     [SerializeField] private bool manager = false;
 
@@ -15,20 +16,30 @@ public class MinerController : MonoBehaviour {
     [Range(1,3)]
     [SerializeField] private float movementSpeedModifier = 1f;
 
+    /*
     [Header("Mining")]
     [Range(1, 3)]
     [SerializeField] private float miningSpeed = 1f;
     [Range(1, 3)]
     [SerializeField] private float miningRate = 1f;
-    [SerializeField] float capacity = 100f;
+    */
+
+    [Header("Collection")]
+    [SerializeField] private float capacity = 100f;
     [SerializeField] private float resourceCollected = 0f;
 
-    private MineboxController mineBoxController;
-    [SerializeField] GameObject resourceCounterObject;
+    Collider2D collider;
+
+    GameObject resourceCounterObject;
     TextMesh resourceCounterTextMesh;
-    
+
+    MineboxController mineBoxController;
     #endregion
 
+
+    /// <summary>
+    /// This method gets called when the character gets clicked.
+    /// </summary>
     private void OnMouseDown()
     {
         move = true;
@@ -36,18 +47,18 @@ public class MinerController : MonoBehaviour {
 
     private void Start()
     {
-        mineBoxController = FindObjectOfType<MineboxController>();
+        resourceCounterObject = gameObject.transform.Find("Resource Counter").gameObject;
         resourceCounterTextMesh = resourceCounterObject.GetComponent<TextMesh>();
+
+        collider = GetComponent<Collider2D>();
+
+        GameObject mineBoxControllerObj = transform.parent.Find("Mine Box").gameObject;
+        mineBoxController = mineBoxControllerObj.GetComponent<MineboxController>() ;
     }
 
-    // Update is called once per frame
-    void Update () {
-
-        if (move || manager)
-        {
-            MoveCharacter();
-        }
-        
+    void Update ()
+    {
+            MoveCharacter();     
     }
 
     /// <summary>
@@ -55,8 +66,11 @@ public class MinerController : MonoBehaviour {
     /// </summary>
     void MoveCharacter()
     {
-        float translatePos = movementSpeed * movementSpeedModifier * Time.deltaTime;
-        transform.Translate(translatePos, 0f, 0f);
+        if (move || manager)
+        {
+            float translatePos = movementSpeed * movementSpeedModifier * Time.deltaTime;
+            transform.Translate(translatePos, 0f, 0f);
+        }   
     }
 
     /// <summary>
@@ -64,23 +78,29 @@ public class MinerController : MonoBehaviour {
     /// </summary>
     void RotateCharacter()
     {
-        // this line below will switch between negative and positive values -> change direction
-        //movementSpeed -= movementSpeed * 2f;
-        //transform.Rotate(0f, transform.eulerAngles.y + 180f, 0f);
         transform.rotation *= Quaternion.Euler(0f, 180f, 0f);
         ResetCounterRotation();
     }
 
+    /// <summary>
+    /// This method sets the Counter rotation to 180 to avoid the text rotating with the character.
+    /// </summary>
     void ResetCounterRotation()
     {
         resourceCounterObject.transform.rotation *= Quaternion.Euler(0f, 180f, 0f);
     }
 
+    /// <summary>
+    /// This method updates the label above the character to display the current value.
+    /// </summary>
     void UpdateResourceCounterTextMesh()
     {
         resourceCounterTextMesh.text = resourceCollected.ToString();
     }
 
+    /// <summary>
+    /// Sets resourceCollected value to match the capacity of the character and updates the characters label.
+    /// </summary>
     void MineResource()
     {
         if (resourceCollected < capacity)
@@ -90,16 +110,20 @@ public class MinerController : MonoBehaviour {
         UpdateResourceCounterTextMesh();
     }
 
+    /// <summary>
+    ///  Removes resourceCollected from the character and adds it to its box and updates box and characters labels.
+    /// </summary>
     void DropOffResources()
     {
         mineBoxController.TotalResource += resourceCollected;
+        mineBoxController.UpdateResourceCounterTextMesh();
+
         resourceCollected = 0f;
         UpdateResourceCounterTextMesh();
     }
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        print(col.transform.tag);
         if (col.transform.tag == "mining_source")
         {
             MineResource();
@@ -107,9 +131,7 @@ public class MinerController : MonoBehaviour {
         else if (col.transform.tag == "minebox")
         {
             DropOffResources();
-            mineBoxController.UpdateResourceCounterTextMesh();
         }
-
         RotateCharacter();
     }
 }
