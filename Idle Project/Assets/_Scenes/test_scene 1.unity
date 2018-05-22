@@ -489,7 +489,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4879057266499630, guid: 2863ba732e01ddd4b9e3be0be6d9e43e, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4570735569301686, guid: 2863ba732e01ddd4b9e3be0be6d9e43e, type: 2}
       propertyPath: m_RootOrder
@@ -497,7 +497,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4812041494327316, guid: 2863ba732e01ddd4b9e3be0be6d9e43e, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114575628477559852, guid: 2863ba732e01ddd4b9e3be0be6d9e43e,
         type: 2}
@@ -839,7 +839,7 @@ Transform:
   m_Children:
   - {fileID: 1291976657}
   m_Father: {fileID: 1733314756}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &445326862
 MonoBehaviour:
@@ -5722,7 +5722,7 @@ Transform:
   m_Children:
   - {fileID: 863370510}
   m_Father: {fileID: 1733314756}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1528618921
 MonoBehaviour:
@@ -6636,6 +6636,16 @@ Prefab:
         type: 2}
       propertyPath: InitialModule.startColor.minColor.a
       value: 0.766
+      objectReference: {fileID: 0}
+    - target: {fileID: 198997265377810602, guid: 403d5fde02ac722439c49ea518bd6aa7,
+        type: 2}
+      propertyPath: InitialModule.maxNumParticles
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 198997265377810602, guid: 403d5fde02ac722439c49ea518bd6aa7,
+        type: 2}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 403d5fde02ac722439c49ea518bd6aa7, type: 2}
