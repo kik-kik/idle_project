@@ -1,24 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ElevatorController : MonoBehaviour
 {
-
     #region variables
-    ElevatorBuildingManager elevatorManager;
-    MineboxController mineBoxController;
-
+    [Header("Movement")]
     [SerializeField] private bool isMoving = true;
+    [Tooltip("- speed moves elevator down, + speed moves elevator up")] [Range(-30, 30)]
     [SerializeField] private float movementSpeed = -1f;
 
     [Header("Collection")]
     [SerializeField] private bool collectResources = true;
     [SerializeField] private float capacity = 100f;
     [SerializeField] private float resourceCollected = 0f;
-    
 
-    //GameObject resourceCounterObject;
+    ElevatorBuildingManager elevatorManager;
+    MineboxController mineBoxController;
+
     TextMesh resourceCounterTextMesh;
     #endregion
 
@@ -41,55 +38,61 @@ public class ElevatorController : MonoBehaviour
         UpdateResourceCounterTextMesh();
 
         elevatorManager = FindObjectOfType<ElevatorBuildingManager>();
-        //mineBoxController = FindObjectOfType<MineboxController>();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         MoveElevator();
     }
 
+
+    /// <summary>
+    /// This method moves the elevator.
+    /// </summary>
     private void MoveElevator()
     {
         if (isMoving)
         {
-            //Bounds areaBounds = boxCollider.bounds;
-
-            Vector3 currentPosition = transform.position;
+            Vector2 currentPosition = transform.position;
             float newYPos = currentPosition.y + movementSpeed * Time.deltaTime;
-
-            //newYPos = Mathf.Clamp(newYPos, areaBounds.min.y, areaBounds.max.y);
-
             transform.position = new Vector2(currentPosition.x, newYPos);
-
-            /*if (transform.position.y == areaBounds.min.y || transform.position.y == areaBounds.max.y)
-            {
-                movementSpeed -= movementSpeed * 2f;
-            }*/
         }
     }
 
+    /// <summary>
+    /// This method changes the direction of the elevator (down, up)
+    /// </summary>
     private void ChangeDirection()
     {
-        //TODO: Change elevator movement
         movementSpeed -= movementSpeed * 2;
     }
 
+    /// <summary>
+    /// Moves the value of resourceCollected to the elevatormanager and sets the value held by the elevator/this object to 0.
+    /// </summary>
     private void DropOffResources()
     {
-        //TODO: Drop off resources to the elevator building
         elevatorManager.AddResources(resourceCollected);
         resourceCollected = 0f;
     }
 
+    /// <summary>
+    /// This method is responsible for removing resources from a minebox and adding it to the resource held by the elevator. The value depends on the amount of space left on the elevator.
+    /// </summary>
     private void CollectResources()
     {
         if (resourceCollected < capacity)
         {
-            resourceCollected = Mathf.Clamp(mineBoxController.TotalResource, 0f, capacity);
+            float spaceAvailable = capacity - resourceCollected;
+            float resourceAvailable = Mathf.Clamp(mineBoxController.TotalResource, 0f, spaceAvailable);
+
+            resourceCollected += resourceAvailable;
+            mineBoxController.TotalResource -= resourceAvailable;
+
             UpdateResourceCounterTextMesh();
         }
+
         if (resourceCollected >= capacity)
         {
             collectResources = false;
@@ -97,6 +100,10 @@ public class ElevatorController : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// This method updates the label showing the current value of the resourceCollected by the elevator.
+    /// </summary>
     void UpdateResourceCounterTextMesh()
     {
         resourceCounterTextMesh.text = resourceCollected.ToString();
@@ -107,8 +114,10 @@ public class ElevatorController : MonoBehaviour
         if (collision.transform.tag == "elevator_shaft_top")
         {
             DropOffResources();
+
             UpdateResourceCounterTextMesh();
             elevatorManager.UpdateResourceCounterTextMesh();
+
             collectResources = true;
             ChangeDirection();
         }
@@ -123,10 +132,8 @@ public class ElevatorController : MonoBehaviour
             mineBoxController = mineBoxControllerObj.GetComponent<MineboxController>();
 
             CollectResources();
-            mineBoxController.TotalResource -= resourceCollected;
-            mineBoxController.UpdateResourceCounterTextMesh();
-
             
+            mineBoxController.UpdateResourceCounterTextMesh();
         }
     }
 

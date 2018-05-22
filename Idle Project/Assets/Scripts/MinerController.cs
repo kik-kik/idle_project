@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [DisallowMultipleComponent]
 public class MinerController : MonoBehaviour {
@@ -28,8 +26,6 @@ public class MinerController : MonoBehaviour {
     [SerializeField] private float capacity = 100f;
     [SerializeField] private float resourceCollected = 0f;
 
-    Collider2D collider;
-
     GameObject resourceCounterObject;
     TextMesh resourceCounterTextMesh;
 
@@ -49,8 +45,6 @@ public class MinerController : MonoBehaviour {
     {
         resourceCounterObject = gameObject.transform.Find("Resource Counter").gameObject;
         resourceCounterTextMesh = resourceCounterObject.GetComponent<TextMesh>();
-
-        collider = GetComponent<Collider2D>();
 
         GameObject mineBoxControllerObj = transform.parent.Find("Mine Box").gameObject;
         mineBoxController = mineBoxControllerObj.GetComponent<MineboxController>() ;

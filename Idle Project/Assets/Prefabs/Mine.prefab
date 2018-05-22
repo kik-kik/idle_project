@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 4389272471595884}
   - component: {fileID: 23992704545809292}
   - component: {fileID: 102055319932778870}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Resource Counter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,12 +106,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4879057266499630}
   - component: {fileID: 212824120934453196}
-  - component: {fileID: 114575628477559852}
   - component: {fileID: 61419544126778788}
   - component: {fileID: 50146818593550638}
-  m_Layer: 0
+  - component: {fileID: 114575628477559852}
+  m_Layer: 8
   m_Name: Miner
-  m_TagString: Untagged
+  m_TagString: miner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
