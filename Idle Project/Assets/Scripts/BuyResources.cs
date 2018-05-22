@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
 
 public class BuyResources : MonoBehaviour {
 
+    #region variables
     public enum ResourcesList { CASH, CRYSTAL, CRATES };
 
     [Header("Buying")]
@@ -14,10 +14,12 @@ public class BuyResources : MonoBehaviour {
     public ResourcesList resourceRequired;
     [SerializeField] private int requiredQuantity = 0;
 
-    private ResourceManager resourceManager;
-    private Button buyButton;
+    ResourceManager resourceManager;
+    Button buyButton;
+    #endregion
 
-    #region getters
+
+    #region getters_and_setters
     public ResourcesList ResourcesToBuy
     {
         get
@@ -55,30 +57,52 @@ public class BuyResources : MonoBehaviour {
     private void Start()
     {
         resourceManager = FindObjectOfType<ResourceManager>();
+
         buyButton = GetComponentInChildren<Button>();
         buyButton.onClick.AddListener(BuyOnClick);
     }
 
+    /// <summary>
+    /// This method attemps to make a transaction.
+    /// </summary>
     void BuyOnClick()
     {
         Transaction(resourceToBuy, quantityToBuy, resourceRequired, requiredQuantity);
     }
 
+    /// <summary>
+    /// This method adds the specified quantity of Cash to the players inventory.
+    /// </summary>
+    /// <param name="quantityToBuy"></param>
     void BuyCash(int quantityToBuy) {
         resourceManager.TotalCash = resourceManager.TotalCash += quantityToBuy;
     }
 
+    /// <summary>
+    /// This method adds the specified quantity of Crystal to the players inventory.
+    /// </summary>
+    /// <param name="crystalsToBuy"></param>
     void BuyCrystals(int crystalsToBuy)
     {
         resourceManager.CrystalTotal = resourceManager.CrystalTotal += crystalsToBuy;
     }
 
+    /// <summary>
+    /// This method adds the specified quantity of Crate to the players inventory.
+    /// </summary>
+    /// <param name="cratesToBuy"></param>
     void BuyCrates(int cratesToBuy)
     {
         resourceManager.CratesTotal = resourceManager.CratesTotal += cratesToBuy;
     }
 
-    // perhaps instead of individual functions for all different resources have one general one
+    /// <summary>
+    /// This method attempts to make the requested transaction, checks if transaction is possible. If yes then the exchange happens.
+    /// </summary>
+    /// <param name="resourceToBuy"></param>
+    /// <param name="quantityToBuy"></param>
+    /// <param name="resourceRequired"></param>
+    /// <param name="requiredQuantity"></param>
     void Transaction(ResourcesList resourceToBuy, int quantityToBuy, ResourcesList resourceRequired, int requiredQuantity)
     {
         switch (resourceToBuy)
@@ -122,6 +146,11 @@ public class BuyResources : MonoBehaviour {
         RemoveResource(resourceRequired, requiredQuantity);
     }
 
+    /// <summary>
+    /// This method removes the specified number of the specified resource from the players inventory.
+    /// </summary>
+    /// <param name="resourceRequired"></param>
+    /// <param name="requiredQuantity"></param>
     void RemoveResource(ResourcesList resourceRequired, int requiredQuantity)
     {
         switch (resourceRequired)
@@ -140,12 +169,17 @@ public class BuyResources : MonoBehaviour {
         }
     }
 
-    //TODO: Complete this method
     void InvalidTransaction()
     {
-        //display a visual hint that the transaction did not work
+        //todo: display a visual hint that the transaction is not possible.
     }
 
+    /// <summary>
+    /// This method returns true if the player has enough of the required resource to make the transaction. Otherwise it returns false.
+    /// </summary>
+    /// <param name="resourceRequire"></param>
+    /// <param name="requiredQuantity"></param>
+    /// <returns></returns>
     bool CheckQuantity(ResourcesList resourceRequire, int requiredQuantity)
     {
         bool transactionIsValid = false;

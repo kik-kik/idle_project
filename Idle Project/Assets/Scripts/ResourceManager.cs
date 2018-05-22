@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ResourceManager : MonoBehaviour {
 
@@ -18,6 +15,7 @@ public class ResourceManager : MonoBehaviour {
     [SerializeField] private int cratesTotal = 0;
     #endregion
 
+    #region getters_and_setters
     #region superCashProperties
     public int TotalCash
     {
@@ -73,38 +71,59 @@ public class ResourceManager : MonoBehaviour {
         }
     }
     #endregion
+    #endregion
 
 
+    /// <summary>
+    /// Adds the specified amount to the amount of Cash resource held by the player.
+    /// </summary>
+    /// <param name="cashToAdd"></param>
     public void AddCash(int cashToAdd)
     {
-        //float cashToAddFloat = Convert.ToSingle(cashToAdd) * incomeModifier;
-        //cashToAdd = cashToAdd * incomeModifier;
-        //print("Adding: " + (int)cashToAddFloat);
-        //totalCash += (int)cashToAddFloat;
         totalCash += cashToAdd;
     }
 
+    /// <summary>
+    /// Adds the specified amount to the amount of Crystal resource held by the player.
+    /// </summary>
+    /// <param name="crystalsToAdd"></param>
     public void AddCrystals(int crystalsToAdd)
     {
         crystalTotal += crystalsToAdd;
     }
 
+    /// <summary>
+    /// Adds the specified amount to the amount of Crate resource held by the player.
+    /// </summary>
+    /// <param name="cratesToAdd"></param>
     public void AddCrate(int cratesToAdd)
     {
         cratesTotal += cratesToAdd;
     }
 
+    /// <summary>
+    /// Removes the specified amount to the amount of Cash resource held by the player.
+    /// </summary>
+    /// <param name="cashToRemove"></param>
     public void RemoveCash(int cashToRemove)
     {
         print("inside removecash");
         totalCash -= cashToRemove;
     }
 
+    /// <summary>
+    /// Removes the specified amount to the amount of Crystal resource held by the player.
+    /// </summary>
+    /// <param name="crystalsToRemove"></param>
     public void RemoveCrystals(int crystalsToRemove)
     {
         crystalTotal -= crystalsToRemove;
     }
 
+    /// <summary>
+    /// Removes the specified amount to the amount of Crate resource held by the player.
+    /// </summary>
+    /// <param name="cratesToRemove"></param>
     public void RemoveCrates(int cratesToRemove)
     {
         cratesTotal -= cratesToRemove;

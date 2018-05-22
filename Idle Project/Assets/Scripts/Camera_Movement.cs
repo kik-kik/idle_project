@@ -4,16 +4,18 @@
 public class Camera_Movement : MonoBehaviour
 {
 
+    #region variables 
     public float dragSpeed = 2;
     private Vector3 dragOrigin;
 
-
     [SerializeField] private Camera linkedCamera;
-    private BoxCollider2D boxCollider;
+
+    Bounds areaBounds;
+    #endregion
 
     void Start()
     {
-        boxCollider = GetComponentInParent<BoxCollider2D>();
+        areaBounds = GetComponentInParent<BoxCollider2D>().bounds;
     }
 
     void Update()
@@ -39,7 +41,6 @@ public class Camera_Movement : MonoBehaviour
         float vertExtent = linkedCamera.orthographicSize;
 
         Vector3 linkedCameraPos = linkedCamera.transform.position;
-        Bounds areaBounds = boxCollider.bounds; // can move to start?
 
         float minYMovement = areaBounds.min.y + vertExtent;
         float maxYMovement = areaBounds.max.y - vertExtent;

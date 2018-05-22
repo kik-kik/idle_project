@@ -74,7 +74,10 @@ public class ElevatorController : MonoBehaviour
     private void DropOffResources()
     {
         elevatorManager.AddResources(resourceCollected);
+        elevatorManager.UpdateResourceCounterTextMesh();
+
         resourceCollected = 0f;
+        UpdateResourceCounterTextMesh();
     }
 
     /// <summary>
@@ -114,9 +117,6 @@ public class ElevatorController : MonoBehaviour
         if (collision.transform.tag == "elevator_shaft_top")
         {
             DropOffResources();
-
-            UpdateResourceCounterTextMesh();
-            elevatorManager.UpdateResourceCounterTextMesh();
 
             collectResources = true;
             ChangeDirection();

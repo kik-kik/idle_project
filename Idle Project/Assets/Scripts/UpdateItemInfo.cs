@@ -1,26 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(BuyResources))]
 public class UpdateItemInfo : MonoBehaviour {
 
+    #region variables
     [SerializeField] private string gameObjectNameWithImage = "ItemImage";
+
     private string itemDescriptionTemplate = "{0} {1}";
     private string buttonTextTemplate = "{0} {1}";
+
+    private int buyQuantity, quantityRequired;
 
     BuyResources buyResourceScript;
     BuyResources.ResourcesList resourceRequired, resourceToBuy;
 
-    private int buyQuantity, quantityRequired;
-
     SpriteManager spriteManager;
-
-    Text itemDescriptionText;
     GameObject itemImageGameobject;
     Image itemImage;
+
+    Text itemDescriptionText;
+
     Button buyItemButton;
+    #endregion
 
     // Use this for initialization
     void Start () {

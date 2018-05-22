@@ -26,6 +26,7 @@ public class WarehouseWorkerController : MonoBehaviour
     ElevatorBuildingManager elevatorManager;
     WarehouseManager warehouseManager;
     [SerializeField] GameObject resourceCounterObject;
+
     RectTransform resourceCounter;
     TextMesh resourceCounterTextMesh;
 
@@ -35,6 +36,7 @@ public class WarehouseWorkerController : MonoBehaviour
     {
         elevatorManager = FindObjectOfType<ElevatorBuildingManager>();
         warehouseManager = FindObjectOfType<WarehouseManager>();
+
         resourceCounter = resourceCounterObject.GetComponent<RectTransform>();
         resourceCounterTextMesh = resourceCounterObject.GetComponent<TextMesh>();
     }
@@ -47,12 +49,7 @@ public class WarehouseWorkerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (move || manager)
-        {
-            MoveCharacter();
-        }
-
+        MoveCharacter();
     }
 
     /// <summary>
@@ -60,8 +57,11 @@ public class WarehouseWorkerController : MonoBehaviour
     /// </summary>
     void MoveCharacter()
     {
-        float translatePos = movementSpeed * speedRate * Time.deltaTime;
-        transform.Translate(translatePos, 0f, 0f);
+        if (move || manager)
+        {
+            float translatePos = movementSpeed * speedRate * Time.deltaTime;
+            transform.Translate(translatePos, 0f, 0f);
+        }
     }
 
     /// <summary>
@@ -69,35 +69,50 @@ public class WarehouseWorkerController : MonoBehaviour
     /// </summary>
     void RotateCharacter()
     {
-        // this line below will switch between negative and positive values -> change direction
-        //movementSpeed -= movementSpeed * 2f;
-        //transform.Rotate(0f, transform.eulerAngles.y + 180f, 0f);
         transform.rotation *= Quaternion.Euler(0f, 180f, 0f);
     }
 
+    /// <summary>
+    /// This method is used to ensure that the label containing the amount of resources carried is not rotated.
+    /// </summary>
     void ResetCounterRotation()
     {
         resourceCounter.rotation = Quaternion.Euler(0f, 0f, 0f);
     }
 
-
+    /// <summary>
+    /// This method is responsible for removing resources from the elevator and adding them to the elevator building.
+    /// </summary>
     void CollectResource()
     {
         if (resourceCollected < capacity)
         {
-            resourceCollected = Mathf.Clamp(elevatorManager.ResourceHeld, 0f, capacity);
-            elevatorManager.RemoveResources(resourceCollected);
+            float spaceAvailable = capacity - resourceCollected;
+            float resourceAvailable = Mathf.Clamp(elevatorManager.ResourceHeld, 0f, spaceAvailable);
+
+            elevatorManager.RemoveResources(resourceAvailable);
+            elevatorManager.UpdateResourceCounterTextMesh();
+
+            resourceCollected += resourceAvailable;
             UpdateResourceCounterTextMesh();
         }
     }
 
+    /// <summary>
+    /// This method removes the resources from the warehouse worker and adds them to the warehouseManager.
+    /// </summary>
     void DropOffResources()
     {
         warehouseManager.AddResources(resourceCollected);
+        //warehouseManager.UpdateResourceCounterTextMesh();
+
         resourceCollected = 0f;
         UpdateResourceCounterTextMesh();
     }
 
+    /// <summary>
+    /// This method updades the label to display the current value of resourceCollected above the object.
+    /// </summary>
     void UpdateResourceCounterTextMesh()
     {
         resourceCounterTextMesh.text = resourceCollected.ToString();
@@ -109,12 +124,9 @@ public class WarehouseWorkerController : MonoBehaviour
         if (col.transform.tag == "elevator_building")
         {
             CollectResource();
-            elevatorManager.UpdateResourceCounterTextMesh();
         }
         else if (col.transform.tag == "warehouse")
         {
-            //TODO: do something when dropping off the coins
-            print("dropping off coins to the warehouse");
             DropOffResources();
         }
         RotateCharacter();

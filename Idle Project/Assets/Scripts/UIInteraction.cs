@@ -1,17 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 
 public class UIInteraction : MonoBehaviour {
 
+    #region declarations
     [SerializeField] private GameObject store, crateMenu, openCrate, crateStore, customizationMenu;
-    //[SerializeField] List<GameObject> UIObjects = new List<GameObject>();
 
-
-    //public enum Action { OPENSTORE, OPENCRATE, OPENCUSTOMIZATIONMENU };
     public Button storeButton, extraCrystalButton, crateMenuButton, crateStoreButton, openCrateButton, backToCrateMenuButton, customizationButton, githubButton;
+    #endregion
 
     private void Start()
     {
@@ -25,12 +22,11 @@ public class UIInteraction : MonoBehaviour {
         githubButton.onClick.AddListener(delegate { EnableObject("github"); });
     }
 
-    private void OnMouseDown()
-    {
-        //Action action = Action.OPENSTORE;
-        //EnableObject(target);
-    }
 
+    /// <summary>
+    /// This method decides which object should be activated depending on which button gets pressed.
+    /// </summary>
+    /// <param name="target"></param>
     void EnableObject(string target)
     {
         switch (target)

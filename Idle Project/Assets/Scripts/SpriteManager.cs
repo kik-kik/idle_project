@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class SpriteManager : MonoBehaviour {
 
     [SerializeField] private Sprite crateImage, crystalImage, coinImage;
 
+    #region getters
     public Sprite CrateImage
     {
         get
@@ -30,4 +28,5 @@ public class SpriteManager : MonoBehaviour {
             return coinImage;
         }
     }
+    #endregion
 }

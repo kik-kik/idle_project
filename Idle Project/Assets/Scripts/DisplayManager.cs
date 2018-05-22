@@ -3,36 +3,42 @@ using UnityEngine.UI;
 
 public class DisplayManager : MonoBehaviour {
 
-    ResourceManager resourceManager;
+    #region variables
+    [SerializeField] string cratesStatusDisplay = "You have {0} crates.";
+
     [SerializeField] Text incomeRateText;
     [SerializeField] Text totalCashText;
     [SerializeField] Text totalCrystalsText;
     [SerializeField] Text cratesTotalText;
-
-    [SerializeField] string cratesStatusDisplay = "You have {0} crates.";
+   
+    ResourceManager resourceManager;
+    #endregion
 
 
     void Start () {
         resourceManager = FindObjectOfType<ResourceManager>();
     }
 	
-	// Update is called once per frame
 	void Update () {
         InvokeRepeating("UpdateUI", 1f, 1f);
-        //UpdateUI();
     }
 
+    /// <summary>
+    /// This method updates the UI at the top of the screen which displays information about resources - cash, crystals, income/s
+    /// </summary>
     void UpdateUI()
     {
         int incomeRate = resourceManager.IncomeRate;
+        incomeRateText.text = incomeRate.ToString();
+
         int totalCash = resourceManager.TotalCash;
+        totalCashText.text = totalCash.ToString();
+
         int totalCrystals = resourceManager.CrystalTotal;
+        totalCrystalsText.text = totalCrystals.ToString();
+
         int cratesTotal = resourceManager.CratesTotal;
         string formattedCratesStatus = string.Format(cratesStatusDisplay, cratesTotal.ToString());
-
-        incomeRateText.text = incomeRate.ToString();
-        totalCashText.text = totalCash.ToString();
-        totalCrystalsText.text = totalCrystals.ToString();
         cratesTotalText.text = formattedCratesStatus;
     }
 }
