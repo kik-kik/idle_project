@@ -28,7 +28,7 @@ public class DisplayManager : MonoBehaviour {
     /// </summary>
     void UpdateUI()
     {
-        int incomeRate = resourceManager.IncomeRate;
+        int incomeRate = (int)resourceManager.IncomePerSecond;
         incomeRateText.text = incomeRate.ToString();
 
         int totalCash = resourceManager.TotalCash;

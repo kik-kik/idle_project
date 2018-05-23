@@ -6,6 +6,7 @@ public class ResourceManager : MonoBehaviour {
     [Header("Super Cash properties")]
     [SerializeField] private int totalCash = 0;
     [SerializeField] private int incomeRate = 10;
+    [SerializeField] private int incomePerSecond = 1;
     [Range(1, 3)]
     [SerializeField] private float incomeModifier = 1.5f;
 
@@ -14,6 +15,8 @@ public class ResourceManager : MonoBehaviour {
 
     [Header("Crates Properties")]
     [SerializeField] private int cratesTotal = 0;
+
+    public static ResourceManager instance;
     #endregion
 
     #region getters_and_setters
@@ -72,8 +75,54 @@ public class ResourceManager : MonoBehaviour {
         }
     }
     #endregion
+
+    public int IncomePerSecond
+    {
+        get
+        {
+            return incomePerSecond;
+        }
+        set
+        {
+            incomePerSecond = value;
+        }
+    }
     #endregion
 
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
+
+    /// <summary>
+    /// When the game is closed the game data gets saved
+    /// </summary>
+    public void OnApplicationQuit()
+    {
+        SaveGameData.Save();
+    }
+
+    private void Start()
+    {
+        LoadGameData.LoadSaveGame(); // Loading game data
+    }
+
+    /// <summary>
+    /// This method calculates how much idlecash was earned based on idleTime in seconds. Then this value gets added to the TotalCash held by the ResourceManager.
+    /// </summary>
+    /// <param name="idleTimeInSeconds"></param>
+    public void AddIdleCash(float idleTimeInSeconds)
+    {
+        int IdleCash = (int)(IncomePerSecond * idleTimeInSeconds);
+        AddCash(IdleCash);
+
+        #if UNITY_EDITOR
+            Debug.Log("Idle Cash added: " + IdleCash);
+        #endif
+    }
 
     /// <summary>
     /// Adds the specified amount to the amount of Cash resource held by the player.
