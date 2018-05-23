@@ -16,10 +16,10 @@ public class WarehouseWorkerController : MonoBehaviour
     [SerializeField] private float speedRate = 1f;
 
     [Header("Carrying")]
-    [Range(1, 3)]
-    [SerializeField] private float collectingSpeed = 1f;
-    [Range(1, 3)]
-    [SerializeField] private float collectingModifier = 1f;
+    //[Range(1, 3)]
+    //[SerializeField] private float collectingSpeed = 1f;
+    //[Range(1, 3)]
+    //[SerializeField] private float collectingModifier = 1f;
     [SerializeField] float capacity = 100f;
     [SerializeField] private float resourceCollected = 0f;
 

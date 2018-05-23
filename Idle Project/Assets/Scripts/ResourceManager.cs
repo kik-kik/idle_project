@@ -6,6 +6,7 @@ public class ResourceManager : MonoBehaviour {
     [Header("Super Cash properties")]
     [SerializeField] private int totalCash = 0;
     [SerializeField] private int incomeRate = 10;
+    [Range(1, 3)]
     [SerializeField] private float incomeModifier = 1.5f;
 
     [Header("Crystal Properties")]
@@ -80,7 +81,7 @@ public class ResourceManager : MonoBehaviour {
     /// <param name="cashToAdd"></param>
     public void AddCash(int cashToAdd)
     {
-        totalCash += cashToAdd;
+        totalCash += (int)(cashToAdd * incomeModifier);
     }
 
     /// <summary>
@@ -107,7 +108,6 @@ public class ResourceManager : MonoBehaviour {
     /// <param name="cashToRemove"></param>
     public void RemoveCash(int cashToRemove)
     {
-        print("inside removecash");
         totalCash -= cashToRemove;
     }
 
