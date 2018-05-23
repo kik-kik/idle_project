@@ -5427,6 +5427,11 @@ Prefab:
       propertyPath: maxVolume
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 82067099148339284, guid: 79461c0265cfd844480200b073d830f2,
+        type: 2}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 79461c0265cfd844480200b073d830f2, type: 2}
   m_IsPrefabParent: 0
