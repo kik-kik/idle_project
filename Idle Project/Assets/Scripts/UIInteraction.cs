@@ -10,11 +10,13 @@ public class UIInteraction : MonoBehaviour {
     public Button storeButton, extraCrystalButton;
     public Button crateStoreButton, crateMenuButton, backToCrateMenuButton, openCrateButton;
     public Button muteButton, githubButton;
+    public Button resetButton;
 
     Image muteButtonImage;
 
     AudioPlayer audioPlayer;
     SpriteManager spriteManager;
+    ResourceManager resourceManager;
 
     #endregion
 
@@ -28,11 +30,14 @@ public class UIInteraction : MonoBehaviour {
         backToCrateMenuButton.onClick.AddListener(delegate { EnableObject("backToCrateMenu"); });
         muteButton.onClick.AddListener(delegate { EnableObject("mute"); });
         githubButton.onClick.AddListener(delegate { EnableObject("github"); });
+        resetButton.onClick.AddListener(delegate { EnableObject("reset_game"); });
 
         muteButtonImage = muteButton.GetComponent<Image>();
 
         audioPlayer = FindObjectOfType<AudioPlayer>();
         spriteManager = FindObjectOfType<SpriteManager>();
+
+        resourceManager = FindObjectOfType<ResourceManager>();
     }
 
 
@@ -71,6 +76,9 @@ public class UIInteraction : MonoBehaviour {
                 break;
             case "github":
                 Application.OpenURL("https://github.com/Kristofelek/idle_project");
+                break;
+            case "reset_game":
+                resourceManager.ResetSaveGame();
                 break;
             default:
                 return;

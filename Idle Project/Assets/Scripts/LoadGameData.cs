@@ -65,6 +65,6 @@ public static class LoadGameData {
         ResourceManager.instance.TotalCash          = PlayerPrefs.GetInt("CashResource");
         ResourceManager.instance.CrystalTotal       = PlayerPrefs.GetInt("CrystalResource");
         ResourceManager.instance.CratesTotal        = PlayerPrefs.GetInt("CrateResource");
-        ResourceManager.instance.IncomePerSecond    = PlayerPrefs.GetInt("IncomePerSecond");
+        ResourceManager.instance.IncomePerSecond    = PlayerPrefs.GetFloat("IncomePerSecond");
     }
 }

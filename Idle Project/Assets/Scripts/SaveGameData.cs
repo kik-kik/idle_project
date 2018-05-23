@@ -27,7 +27,7 @@ public static class SaveGameData{
         PlayerPrefs.SetInt("CashResource",      ResourceManager.instance.TotalCash);
         PlayerPrefs.SetInt("CrystalResource",   ResourceManager.instance.CrystalTotal);
         PlayerPrefs.SetInt("CrateResource",     ResourceManager.instance.CratesTotal);
-        PlayerPrefs.SetInt("IncomePerSecond",   ResourceManager.instance.IncomePerSecond);
+        PlayerPrefs.SetFloat("IncomePerSecond",   ResourceManager.instance.IncomePerSecond);
     }
 
 }

@@ -6,7 +6,8 @@ public class ResourceManager : MonoBehaviour {
     [Header("Super Cash properties")]
     [SerializeField] private int totalCash = 0;
     [SerializeField] private int incomeRate = 10;
-    [SerializeField] private int incomePerSecond = 1;
+    [SerializeField] private float incomePerSecond = 0.1f;
+    private float lastIncomeValue = 0f;
     [Range(1, 3)]
     [SerializeField] private float incomeModifier = 1.5f;
 
@@ -15,6 +16,9 @@ public class ResourceManager : MonoBehaviour {
 
     [Header("Crates Properties")]
     [SerializeField] private int cratesTotal = 0;
+
+    float timer = 0.0f;
+    int secondsSinceLastCollection = 0;
 
     public static ResourceManager instance;
     #endregion
@@ -76,7 +80,7 @@ public class ResourceManager : MonoBehaviour {
     }
     #endregion
 
-    public int IncomePerSecond
+    public float IncomePerSecond
     {
         get
         {
@@ -89,14 +93,6 @@ public class ResourceManager : MonoBehaviour {
     }
     #endregion
 
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-    }
-
     /// <summary>
     /// When the game is closed the game data gets saved
     /// </summary>
@@ -105,10 +101,54 @@ public class ResourceManager : MonoBehaviour {
         SaveGameData.Save();
     }
 
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
+
+    
     private void Start()
     {
         LoadGameData.LoadSaveGame(); // Loading game data
     }
+
+
+    private void Update()
+    {
+        timer += Time.deltaTime;
+        secondsSinceLastCollection = (int)timer % 60;
+    }
+
+    /// <summary>
+    /// CAUTION! This method resets all PlayerPrefs and resets all values to defaults
+    /// </summary>
+    public void ResetSaveGame()
+    {
+        PlayerPrefs.DeleteAll();
+
+        // TODO: make these values variables instead
+        totalCash = 0;
+        CrystalTotal = 50;
+        cratesTotal = 0;
+        incomePerSecond = 0.1f;
+    }
+
+
+    /// <summary>
+    /// This method works out the Coin income per second
+    /// </summary>
+    void UpdateIncomePerSecond()
+    {
+        incomePerSecond = lastIncomeValue / secondsSinceLastCollection;
+
+        timer = 0f;
+        secondsSinceLastCollection = 0;
+    }
+
 
     /// <summary>
     /// This method calculates how much idlecash was earned based on idleTime in seconds. Then this value gets added to the TotalCash held by the ResourceManager.
@@ -117,7 +157,7 @@ public class ResourceManager : MonoBehaviour {
     public void AddIdleCash(float idleTimeInSeconds)
     {
         int IdleCash = (int)(IncomePerSecond * idleTimeInSeconds);
-        AddCash(IdleCash);
+        totalCash += IdleCash;
 
         #if UNITY_EDITOR
             Debug.Log("Idle Cash added: " + IdleCash);
@@ -130,7 +170,10 @@ public class ResourceManager : MonoBehaviour {
     /// <param name="cashToAdd"></param>
     public void AddCash(int cashToAdd)
     {
-        totalCash += (int)(cashToAdd * incomeModifier);
+        cashToAdd = (int)(cashToAdd * incomeModifier);
+        lastIncomeValue = cashToAdd;
+        totalCash += cashToAdd;
+        UpdateIncomePerSecond();
     }
 
     /// <summary>

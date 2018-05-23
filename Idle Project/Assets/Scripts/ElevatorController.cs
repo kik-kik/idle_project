@@ -5,9 +5,10 @@ public class ElevatorController : MonoBehaviour
     #region variables
     [Header("Movement")]
     [SerializeField] private bool isMoving = true;
-    [Tooltip("- speed moves elevator down, + speed moves elevator up")] [Range(-30, 30)]
+    [Tooltip("- speed moves elevator down, + speed moves elevator up")]
+    [Range(-64, 0)]
     [SerializeField] private float movementSpeed = -1f;
-    [Range(1, 3)]
+    [Range(1, 5)]
     [SerializeField] private float speedModifier = 1f;
 
     [Header("Collection")]
