@@ -4,6 +4,7 @@ public class SpriteManager : MonoBehaviour {
 
     [SerializeField] private Sprite crateImage, crystalImage, coinImage;
     [SerializeField] private Sprite muteOffImage, muteOnImage;
+    [SerializeField] private Sprite missingImage;
 
     #region getters
     public Sprite CrateImage
@@ -43,6 +44,14 @@ public class SpriteManager : MonoBehaviour {
         get
         {
             return muteOnImage;
+        }
+    }
+
+    public Sprite MissingImage
+    {
+        get
+        {
+            return missingImage;
         }
     }
     #endregion

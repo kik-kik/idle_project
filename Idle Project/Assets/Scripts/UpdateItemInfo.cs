@@ -24,7 +24,7 @@ public class UpdateItemInfo : MonoBehaviour {
     Button buyItemButton;
     #endregion
 
-    // Use this for initialization
+    
     void Start () {
         spriteManager = FindObjectOfType<SpriteManager>();
 
@@ -33,8 +33,6 @@ public class UpdateItemInfo : MonoBehaviour {
 
         itemDescriptionText = GetComponentInChildren<Text>();
         itemImage = transform.Find(gameObjectNameWithImage).gameObject.GetComponent<Image>();
-
-        itemImage.sprite = spriteManager.CrateImage;
 
         resourceRequired = buyResourceScript.resourceRequired;
         resourceToBuy = buyResourceScript.resourceToBuy;
@@ -46,20 +44,49 @@ public class UpdateItemInfo : MonoBehaviour {
         string formattedButtonText = string.Format(buttonTextTemplate, quantityRequired, resourceRequired);
 
         SetItemDescription(formattedDescription);
-        //SetItemSprite();
+        SetItemSprite(resourceToBuy);
         SetButtonText(formattedButtonText);
     }
 
-    void SetItemSprite()
+    /// <summary>
+    /// This method figures out and sets the correct sprite image based on the resource to buy
+    /// </summary>
+    /// <param name="resourceToBuy"></param>
+    void SetItemSprite(BuyResources.ResourcesList resourceToBuy)
     {
-        itemImage.sprite = spriteManager.CrateImage;
+        Sprite currentItemImage = null;
+        switch (resourceToBuy)
+        {
+            case BuyResources.ResourcesList.CASH:
+                currentItemImage = spriteManager.CoinImage;
+                break;
+            case BuyResources.ResourcesList.CRYSTAL:
+                currentItemImage = spriteManager.CrystalImage;
+                break;
+            case BuyResources.ResourcesList.CRATES:
+                currentItemImage = spriteManager.CrateImage;
+                break;
+            default:
+                currentItemImage = spriteManager.MissingImage;
+                break;
+        }
+
+        itemImage.sprite = currentItemImage;
     }
 
+    /// <summary>
+    /// This method sets the description of the item.
+    /// </summary>
+    /// <param name="formattedDescription"></param>
     void SetItemDescription(string formattedDescription)
     {
         itemDescriptionText.text = formattedDescription;
     }
 
+    /// <summary>
+    /// This method sets the text of the button for the specific item.
+    /// </summary>
+    /// <param name="formattedButtonText"></param>
     void SetButtonText(string formattedButtonText)
     {
         buyItemButton.GetComponentInChildren<Text>().text = formattedButtonText;

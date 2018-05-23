@@ -285,6 +285,12 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 5d75d864e0d8a6b4486f331676642647,
         type: 3}
+    - target: {fileID: 114493995038933650, guid: 2ee93ead469483b4ab0dbfc3e641f7df,
+        type: 2}
+      propertyPath: missingImage
+      value: 
+      objectReference: {fileID: 21300000, guid: df199e17abfbe134d9cca069a7ac9248,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2ee93ead469483b4ab0dbfc3e641f7df, type: 2}
   m_IsPrefabParent: 0
@@ -1342,7 +1348,8 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114406893434507860, guid: 4de54e1e76ba22343bef6cb090bdc701, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 4de54e1e76ba22343bef6cb090bdc701, type: 2}
   m_IsPrefabParent: 0
 --- !u!224 &824659901 stripped
@@ -1989,6 +1996,33 @@ Prefab:
     - target: {fileID: 1727091138921220, guid: 96c06e7a7b29a4247ba57afed0401f31, type: 2}
       propertyPath: m_Name
       value: Crate Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 1727091138921220, guid: 96c06e7a7b29a4247ba57afed0401f31, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1072164697408802, guid: 96c06e7a7b29a4247ba57afed0401f31, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114227998877543044, guid: 96c06e7a7b29a4247ba57afed0401f31,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1bb7b6f87ea87be41a25c94c1ca4bf3c,
+        type: 3}
+    - target: {fileID: 114788676503376916, guid: 96c06e7a7b29a4247ba57afed0401f31,
+        type: 2}
+      propertyPath: m_Text
+      value: Feature coming soon
+      objectReference: {fileID: 0}
+    - target: {fileID: 1251848722323940, guid: 96c06e7a7b29a4247ba57afed0401f31, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1693405242955690, guid: 96c06e7a7b29a4247ba57afed0401f31, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96c06e7a7b29a4247ba57afed0401f31, type: 2}
@@ -4708,7 +4742,7 @@ Prefab:
     - target: {fileID: 224823464019238904, guid: 1ba9ad5a8f158d4478834007908a8624,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -70
+      value: -105
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1ba9ad5a8f158d4478834007908a8624, type: 2}

@@ -7,6 +7,8 @@ public class ElevatorController : MonoBehaviour
     [SerializeField] private bool isMoving = true;
     [Tooltip("- speed moves elevator down, + speed moves elevator up")] [Range(-30, 30)]
     [SerializeField] private float movementSpeed = -1f;
+    [Range(1, 3)]
+    [SerializeField] private float speedModifier = 1f;
 
     [Header("Collection")]
     [SerializeField] private bool collectResources = true;
@@ -55,7 +57,7 @@ public class ElevatorController : MonoBehaviour
         if (isMoving)
         {
             Vector2 currentPosition = transform.position;
-            float newYPos = currentPosition.y + movementSpeed * Time.deltaTime;
+            float newYPos = currentPosition.y + movementSpeed * speedModifier * Time.deltaTime;
             transform.position = new Vector2(currentPosition.x, newYPos);
         }
     }

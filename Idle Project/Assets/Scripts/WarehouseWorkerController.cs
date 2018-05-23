@@ -13,7 +13,7 @@ public class WarehouseWorkerController : MonoBehaviour
     [Header("Speed")]
     [SerializeField] private float movementSpeed = 1f;
     [Range(1, 3)]
-    [SerializeField] private float speedRate = 1f;
+    [SerializeField] private float speedModifier = 1f;
 
     [Header("Carrying")]
     //[Range(1, 3)]
@@ -59,7 +59,7 @@ public class WarehouseWorkerController : MonoBehaviour
     {
         if (move || manager)
         {
-            float translatePos = movementSpeed * speedRate * Time.deltaTime;
+            float translatePos = movementSpeed * speedModifier * Time.deltaTime;
             transform.Translate(translatePos, 0f, 0f);
         }
     }
